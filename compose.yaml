@@ -6,6 +6,9 @@ services:
       context: .
       # dockerfile 指定相对于 context 的路径
       dockerfile: ./linux/Dockerfile
+      args:
+        HTTP_PROXY: ""
+        HTTPS_PROXY: ""
     container_name: linux_workspace
     volumes:
       - ./linux/workspace:/workspace

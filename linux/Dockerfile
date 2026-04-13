@@ -7,6 +7,9 @@ ENV http_proxy="" \
     HTTPS_PROXY="" \
     FTP_PROXY="" \
     ALL_PROXY=""
+# 2. 删除物理配置文件（有些镜像或环境会自动生成这些文件）
+RUN rm -f /etc/apt/apt.conf.d/*proxy* \
+    && rm -f /etc/apt/apt.conf
 # 1. 更新源并安装基础工具 + SSH 服务
 RUN apt-get update && apt-get install -y \
     git \

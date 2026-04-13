@@ -1,9 +1,22 @@
 services:
-  db:
+  ubuntu-dev:
+    build:
+      # context 指定构建的上下文环境，通常设为根目录 '.'
+      # 这样 Docker 才能访问到根目录下的 src 等文件夹（如果构建时需要的话）
+      context: .
+      # dockerfile 指定相对于 context 的路径
+      dockerfile: ./linux/Dockerfile
+    container_name: linux_workspace
+    volumes:
+      - ./linux/workspace:/workspace
+    working_dir: /workspace
+    ports:
+      - "2222:22"
+  postgres:
     image: postgres
     restart: always
     ports:
       - "5432:5432"
     shm_size: 128mb
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: abc123@

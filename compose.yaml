@@ -1,5 +1,5 @@
 services:
-  ubuntu-dev:
+  linux-dev:
     build:
       # context 指定构建的上下文环境，通常设为根目录 '.'
       # 这样 Docker 才能访问到根目录下的 src 等文件夹（如果构建时需要的话）

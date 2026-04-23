@@ -36,3 +36,14 @@ services:
       MYSQL_PASSWORD: abc123@
     volumes:
       - ./mysql/data:/var/lib/mysql
+
+  mongodb:
+    image: mongo:8.0
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: abc123@
+    volumes:
+      - ./mongodb/data:/data/db

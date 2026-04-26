@@ -14,7 +14,12 @@ ENV http_proxy="" \
     PATH="/root/.cargo/bin:/root/.nvm/versions/node/v24.14.1/bin:${PATH}"
 
 # 更新系统并安装基础工具 + SSH 服务
-RUN pacman -Syu --noconfirm \
+RUN if grep -q '^#\?DisableSandbox' /etc/pacman.conf; then \
+        sed -i 's/^#\?DisableSandbox.*/DisableSandbox/' /etc/pacman.conf; \
+    else \
+        printf '\nDisableSandbox\n' >> /etc/pacman.conf; \
+    fi \
+    && pacman -Syu --noconfirm \
     && pacman -S --noconfirm --needed \
     git \
     curl \
